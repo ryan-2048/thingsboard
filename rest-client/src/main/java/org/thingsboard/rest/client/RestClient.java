@@ -504,7 +504,7 @@ public class RestClient implements Closeable {
                 params).getBody();
     }
 
-    public PageData<AlarmInfo> getAlarmsV2(EntityId entityId, String statusList, String severityList, String typeList, String assigneeId, Long startTime, Long endTime, TimePageLink pageLink) {
+    public PageData<AlarmInfo> getAlarmsV2(EntityId entityId, String statusList, String severityList, String typeList, String assigneeId, TimePageLink pageLink) {
         String urlSecondPart = "/api/v2/alarm/{entityType}/{entityId}?t=1";
         Map<String, String> params = new HashMap<>();
         params.put("entityType", entityId.getEntityType().name());
@@ -534,16 +534,6 @@ public class RestClient implements Closeable {
         if (assigneeId != null) {
             params.put("assigneeId", assigneeId);
             urlSecondPart += "&assigneeId={assigneeId}";
-        }
-
-        if (startTime != null) {
-            params.put("startTime", startTime.toString());
-            urlSecondPart += "&startTime={startTime}";
-        }
-
-        if (endTime != null) {
-            params.put("endTime", endTime.toString());
-            urlSecondPart += "&endTime={endTime}";
         }
 
         addTimePageLinkToParam(params, pageLink);
